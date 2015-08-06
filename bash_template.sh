@@ -5,7 +5,7 @@
 ############################################################
 #These are settings to help a script run "cleanly"
 set -o errexit #exits script when a command fails
-set -o pipefail #the exit status of a command that returned a non-zero exit code
+set -o pipefail #the exit status of a command that returned a non-zero exit code during a pipe
 set -o nounset #exit the script when you try to use undeclared variables
 #set -o xtrace #prints out the commands a they are called, (for debugging)
 
@@ -132,12 +132,12 @@ done
 
 if [ -z ${input+x} ]; then
 	echo "-i <input> is unset, printing help and exiting"
-	exit 1
+	printhelp
 fi
 
 if [ -z ${output+x} ]; then
-	echo "-o <output> is unset, existing"
-	exit 1
+	echo "-o <output> is unset, printing help and exiting"
+	printhelp
 fi
 
 ############################################################
